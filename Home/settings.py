@@ -30,7 +30,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'school',
     'student',
-    'home_auth'
+    'home_auth',
+    'superuser'
 
 ]
 
@@ -44,6 +45,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'superuser.middleware.restrict_dashboard.RestrictAdminDashboardMiddleware',
+
 ]
 
 ROOT_URLCONF = 'Home.urls'

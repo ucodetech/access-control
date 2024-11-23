@@ -1,4 +1,4 @@
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseForbidden
 from django.shortcuts import render
 from django.http import JsonResponse
 from .models import Notification
@@ -11,8 +11,7 @@ def index(request):
 def dashboard(request):
     unread_notification = Notification.objects.filter(user=request.user, is_read=False)
     unread_notification_count = unread_notification.count()
-    return render(request, "students/student-dashboard.html")
-
+    return render(request, "students/superuser-dashboard.html")
 
 
 def mark_notification_as_read(request):

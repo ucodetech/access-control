@@ -21,7 +21,7 @@ class CustomUser(AbstractUser):
        # Fields for user roles
     is_student = models.BooleanField(default=False)
     is_admin = models.BooleanField(default=False)
-    is_teacher = models.BooleanField(default=False) 
+    is_supervisor = models.BooleanField(default=False)
 
     # Set related_name to None to prevent reverse relationship creation
     groups = models.ManyToManyField(

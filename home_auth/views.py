@@ -14,7 +14,7 @@ def signup_view(request):
         last_name = request.POST['last_name']
         email = request.POST['email']
         password = request.POST['password']
-        role = request.POST.get('role')  # Get role from the form (student, teacher, or admin)
+        role = request.POST.get('role')  # Get role from the form (student, supervisor, or superuser)
         
         # Create the user
         user = CustomUser.objects.create_user(
@@ -28,9 +28,9 @@ def signup_view(request):
         # Assign the appropriate role
         if role == 'student':
             user.is_student = True
-        elif role == 'teacher':
-            user.is_teacher = True
-        elif role == 'admin':
+        elif role == 'supervisor':
+            user.is_supervisor = True
+        elif role == 'superuser':
             user.is_admin = True
 
         user.save()  # Save the user with the assigned role
@@ -53,8 +53,8 @@ def login_view(request):
             # Redirect user based on their role
             if user.is_admin:
                 return redirect('admin_dashboard')
-            elif user.is_teacher:
-                return redirect('teacher_dashboard')
+            elif user.is_supervisor:
+                return redirect('supervisor_dashboard')
             elif user.is_student:
                 return redirect('dashboard')
             else:

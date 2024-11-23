@@ -1,18 +1,17 @@
-from django.contrib import admin
-
 # Register your models here.
 from django.contrib import admin
-from .models import Parent, Student
+# from .models import Student, AccessControl
 
-@admin.register(Parent)
-class ParentAdmin(admin.ModelAdmin):
-    list_display = ('father_name', 'mother_name', 'father_mobile', 'mother_mobile')
-    search_fields = ('father_name', 'mother_name', 'father_mobile', 'mother_mobile')
-    list_filter = ('father_name', 'mother_name')
 
-@admin.register(Student)
-class StudentAdmin(admin.ModelAdmin):
-    list_display = ('first_name', 'last_name', 'student_id', 'gender', 'date_of_birth', 'student_class', 'joining_date', 'mobile_number', 'admission_number', 'section')
-    search_fields = ('first_name', 'last_name', 'student_id', 'student_class', 'admission_number')
-    list_filter = ('gender', 'student_class', 'section')
-    readonly_fields = ('student_image',)  # Optional: makes the image field read-only
+# @admin.register(Student)
+# class StudentAdmin(admin.ModelAdmin):
+#     list_display = ('first_name', 'last_name', 'gender', 'date_of_birth', 'course', 'level', 'mobile_number', 'department')
+#     search_fields = ('first_name', 'last_name', 'unique_id', 'course', 'level', 'department')
+#     list_filter = ('gender', 'course', 'level','department')
+#     readonly_fields = ('image',)  # Optional: makes the image field read-only
+#
+# @admin.register(AccessControl)
+# class AccessControlAdmin(admin.ModelAdmin):
+#     list_display = ('student', 'unique_id')  # Adjust the fields to your needs
+#     search_fields = ('student__first_name', 'student__last_name', 'unique_id')
+#     readonly_fields = ('unique_id','qr_code',)  #
