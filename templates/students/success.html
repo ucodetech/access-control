@@ -1,0 +1,68 @@
+{% extends 'Home/base.html' %}
+{% load static %}
+{% block body %}
+
+<div class="page-wrapper">
+    <div class="content container-fluid">
+
+        <!-- Page Header -->
+        <div class="page-header">
+            <div class="row">
+                <div class="col-sm-12">
+                    <h3 class="page-title">Access Granted!</h3>
+                    <ul class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="{% url 'dashboard' %}">Dashboard</a></li>
+                        <li class="breadcrumb-item active">Area</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-5">
+           {% if messages %}
+                <ul class="messages">
+                    {% for message in messages %}
+                    <li {% if message.tags %} class="{{ message.tags }}"{% endif %} >{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+      </div>
+        <!-- Stats Cards -->
+        <div class="row">
+                <div class="col-xl-12 col-sm-12 col-12 d-flex">
+                    <div class="card bg-nine w-100"
+                         style="background-image: url('{{ area.image.url }}'); background-size: cover; background-position: center; height:500px">
+                        <div class="card-body">
+                            <div class="db-widgets d-flex justify-content-center align-items-center">
+                                <div class="db-info">
+                                    <h2 class="btn btn-primary">{{ area.name }}</h2>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            <!-- Repeat similar structure for other stats cards -->
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>Copyright © 2020 Dreamguys.</p>
+    </footer>
+
+</div>
+
+<!-- Scripts -->
+<script src="{% static 'assets/js/jquery-3.6.0.min.js' %}"></script>
+<script src="{% static 'assets/js/popper.min.js' %}"></script>
+<script src="{% static 'assets/plugins/bootstrap/js/bootstrap.min.js' %}"></script>
+<script src="{% static 'assets/plugins/slimscroll/jquery.slimscroll.min.js' %}"></script>
+<script src="{% static 'assets/plugins/apexchart/apexcharts.min.js' %}"></script>
+<script src="{% static 'assets/plugins/apexchart/chart-data.js' %}"></script>
+<script src="{% static 'assets/plugins/simple-calendar/jquery.simple-calendar.js' %}"></script>
+<script src="{% static 'assets/js/calander.js' %}"></script>
+<script src="{% static 'assets/js/circle-progress.min.js' %}"></script>
+<script src="{% static 'assets/js/script.js' %}"></script>
+
+{% endblock %}

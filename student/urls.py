@@ -3,12 +3,9 @@ from django.urls import path,include
 from . import views
 
 urlpatterns = [
-    # path("", views.student_list, name='student_list'),
-    # path("add/", views.add_student, name="add_student"),
-    # path('students/<str:slug>/', views.view_student, name='view_student'),
-    # path('edit/<str:slug>/', views.edit_student, name='edit_student'),
-    # path('delete/<str:slug>/', views.delete_student, name='delete_student'),
-
-  
-
+    path("", views.dashboard, name='dashboard'),
+    path("attendance/", include('Attendance.urls')),
+    path('download-card/<int:student_id>/', views.generate_student_card, name='generate_card'),
+    path('areas/', views.areas, name='areas'),
+    path('success/<str:area_id>', views.success, name='success'),
 ]

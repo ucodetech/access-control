@@ -1,0 +1,83 @@
+{% extends 'Home/base.html' %}
+{% load static %}
+{% block body %}
+   
+         <div class="page-wrapper">
+            <div class="content container-fluid">
+               <div class="page-header">
+                  <div class="row align-items-center">
+                     <div class="col">
+                        <h3 class="page-title">Student Areas</h3>
+                        <ul class="breadcrumb">
+                           <li class="breadcrumb-item"><a href="{% url 'student_areas' %}">Student Areas</a></li>
+                           <li class="breadcrumb-item active">Student Areas</li>
+                        </ul>
+                     </div>
+                  </div>
+               </div>
+               <div class="row">
+                  <div class="col-sm-12">
+                     <div class="card card-table">
+                        <div class="card-body">
+                           <div class="table-responsive">
+                              <table class="table table-hover table-center mb-0 datatable">
+                                 <thead>
+                                    <tr>
+                                       <th>Student</th>
+                                       <th>Areas</th>
+                                    </tr>
+                                 </thead>
+
+                                 <tbody>
+                                    {% for entry in student_area_mapping  %}
+                                    <tr>
+                                       <td>
+                                          <h2 class="table-avatar">
+                                             <a href="" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="{{ entry.student.image.url }}" alt="User Image"></a>
+                                             <a href="">{{ entry.student.first_name }} {{ entry.student.last_name}}</a>
+                                          </h2>
+
+                                       </td>
+                                       <td>
+                                          <ul>
+                                              {% for ar in entry.areas %}
+                                              <li class="mb-2">
+                                                 <h2 class="table-avatar">
+                                                   <a href="" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="{{ ar.image.url }}" alt="area Image"></a>
+                                                   <a href="">{{ ar.name }} </a>
+
+                                                </h2>
+                                                  <form action="{% url 'delete_student_area' entry.student.id  ar.id%}" method="POST" style="display:inline;">
+                                                     {% csrf_token %}
+                                                     <button type="submit" class="btn btn-sm bg-danger-light" onclick="return confirm('Are you sure you want to delete this record?');">
+                                                         <i class="fas fa-trash"></i>
+                                                     </button>
+                                                 </form>
+                                              </li>
+
+                                              {% endfor %}
+                                          </ul>
+                                      </td>
+
+
+                                    </tr>
+                                    {% endfor %}
+                                 </tbody>
+                              </table>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <script src="{%static 'assets/js/jquery-3.6.0.min.js' %}"></script>
+      <script src="{%static 'assets/js/popper.min.js' %}"></script>
+      <script src="{%static 'assets/plugins/bootstrap/js/bootstrap.min.js' %}"></script>
+      <script src="{%static 'assets/plugins/slimscroll/jquery.slimscroll.min.js' %}"></script>
+      <script src="{%static 'assets/js/script.js' %}"></script>
+   </body>
+   <!-- Mirrored from preschool.dreamguystech.com/html-template/add-student.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 28 Oct 2021 11:11:50 GMT -->
+</html>
+{% endblock %}

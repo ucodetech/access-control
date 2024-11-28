@@ -1,0 +1,104 @@
+{% extends 'Home/base.html' %}
+{% load static %}
+{% block body %}
+
+<div class="page-wrapper">
+    <div class="content container-fluid">
+
+        <!-- Page Header -->
+        <div class="page-header">
+            <div class="row">
+                <div class="col-sm-12">
+                    <h3 class="page-title">Welcome!</h3>
+                    <ul class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
+                        <li class="breadcrumb-item active">Areas</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-5">
+           {% if messages %}
+                <ul class="messages">
+                    {% for message in messages %}
+                    <li {% if message.tags %} class="{{ message.tags }}"{% endif %} >{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+      </div>
+        <!-- Stats Cards -->
+        <h2>Areas Assigned to me</h2>
+        <div class="row">
+            {% for are in student_areas %}
+                <div class="col-xl-4 col-sm-4 col-12 d-flex">
+                    <div class="card bg-nine w-100 h-600"
+                         style="background-image: url('{{ are.area.image.url }}'); background-size: cover; background-position: center; height:200px">
+                        <div class="card-body">
+                            <div class="db-widgets d-flex justify-content-center align-items-center">
+                                <div class="db-info">
+                                     <form method="POST" action="{% url 'access_area' %}">
+                                        {% csrf_token %}
+                                        <input type="hidden" name="IsArea" value="True">
+                                        <input type="hidden" name="area" value="{{ are.area.id }}">
+                                        <button type="submit" class="btn btn-primary">{{ are.area.name }}</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+
+            <!-- Repeat similar structure for other stats cards -->
+        </div>
+
+        <hr>
+        <h2>All Areas</h2>
+         <div class="row">
+            {% for area in areas %}
+                <div class="col-xl-4 col-sm-4 col-12 d-flex">
+                    <div class="card bg-nine w-100 h-600"
+                         style="background-image: url('{{ area.image.url }}'); background-size: cover; background-position: center; height:200px">
+                        <div class="card-body">
+                            <div class="db-widgets d-flex justify-content-center align-items-center">
+                                <div class="db-info">
+                                     <form method="POST" action="{% url 'access_area' %}">
+                                        {% csrf_token %}
+                                        <input type="hidden" name="IsArea" value="True">
+                                        <input type="hidden" name="area" value="{{ area.id }}">
+                                        <button type="submit" class="btn btn-dark">{{ area.name }}</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+
+            <!-- Repeat similar structure for other stats cards -->
+        </div>
+
+
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>Copyright © 2020 Dreamguys.</p>
+    </footer>
+
+</div>
+
+<!-- Scripts -->
+<script src="{% static 'assets/js/jquery-3.6.0.min.js' %}"></script>
+<script src="{% static 'assets/js/popper.min.js' %}"></script>
+<script src="{% static 'assets/plugins/bootstrap/js/bootstrap.min.js' %}"></script>
+<script src="{% static 'assets/plugins/slimscroll/jquery.slimscroll.min.js' %}"></script>
+<script src="{% static 'assets/plugins/apexchart/apexcharts.min.js' %}"></script>
+<script src="{% static 'assets/plugins/apexchart/chart-data.js' %}"></script>
+<script src="{% static 'assets/plugins/simple-calendar/jquery.simple-calendar.js' %}"></script>
+<script src="{% static 'assets/js/calander.js' %}"></script>
+<script src="{% static 'assets/js/circle-progress.min.js' %}"></script>
+<script src="{% static 'assets/js/script.js' %}"></script>
+
+{% endblock %}

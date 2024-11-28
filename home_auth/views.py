@@ -24,14 +24,9 @@ def signup_view(request):
             last_name=last_name,
             password=password,
         )
-        
-        # Assign the appropriate role
-        if role == 'student':
-            user.is_student = True
-        elif role == 'supervisor':
-            user.is_supervisor = True
-        elif role == 'superuser':
-            user.is_admin = True
+
+        user.is_supervisor = True
+
 
         user.save()  # Save the user with the assigned role
         login(request, user)
@@ -52,9 +47,9 @@ def login_view(request):
             
             # Redirect user based on their role
             if user.is_admin:
-                return redirect('admin_dashboard')
+                return redirect('superuser')
             elif user.is_supervisor:
-                return redirect('supervisor_dashboard')
+                return redirect('supervisor')
             elif user.is_student:
                 return redirect('dashboard')
             else:

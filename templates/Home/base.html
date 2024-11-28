@@ -22,7 +22,7 @@
                  <img src="{% static 'assets/img/logo.png' %}" alt="Logo">
                </a>
                <a href="index.html" class="logo logo-small">
-               <img src="{% static 'assets/img/logo-small.png' %}g" alt="Logo" width="30" height="30">
+               <img src="{% static 'assets/img/logo-small.png' %}" alt="Logo" width="30" height="30">
                </a>
             </div>
             <a href="javascript:void(0);" id="toggle_btn">
@@ -76,17 +76,17 @@
                </li>
                <li class="nav-item dropdown has-arrow">
                   <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
-                  <span class="user-img"><img class="rounded-circle" src="{% static 'assets/img/profiles/avatar-03.png' %}" width="31" alt="{{user.username}}"></span>
+                  <span class="user-img"><img class="rounded-circle" src="{% static 'assets/img/user.jpg' %}" width="31" alt="{{user.username}}"></span>
                   </a>
 
                   <div class="dropdown-menu">
                      <div class="user-header">
                         <div class="avatar avatar-sm">
-                           <img src="{% static 'assets/img/profiles/avatar-03.png' %}" alt="User Image" class="avatar-img rounded-circle">
+                           <img src="{% static 'assets/img/user.jpg' %}" alt="User Image" class="avatar-img rounded-circle">
                         </div>
                         <div class="user-text">
                            <h6>{{user.username}}</h6>
-                           <p class="text-muted mb-0">Administrator</p>
+                           <p class="text-muted mb-0">Role</p>
                         </div>
                      </div>
                      <a class="dropdown-item" href="profile.html">My Profile</a>
@@ -105,83 +105,55 @@
                      </li>
                      <li class="submenu active">
                         <a href="#"><i class="fas fa-user-graduate"></i> <span> Dashboard</span> <span class="menu-arrow"></span></a>
+                      {% if user.is_superuser %}
                         <ul>
                            <li><a href="{% url 'superuser' %}" class="active">Admin Dashboard</a></li>
                         </ul>
+                        {% elif user.is_student%}
+                           <ul>
+                            <li><a href="{% url 'dashboard' %}" class="active">Dashboard</a></li>
+                           </ul>
+                        {% else %}
+                           <ul>
+                              <li><a href="{% url 'superuser' %}" class="active">Supervisor Dashboard</a></li>
+                           </ul>
+                        {% endif %}
                      </li>
+                     {% if user.is_superuser %}
+
                      <li class="submenu">
                         <a href="#"><i class="fas fa-user-graduate"></i> <span> Students</span> <span class="menu-arrow"></span></a>
                         <ul>
                            <li><a href="{% url 'student_list' %}">Student List</a></li>
-                           <li><a href="student-details.html">Student View</a></li>
                            <li><a href="{% url 'add_student' %}">Student Add</a></li>
-                           <li><a href="edit-student.html">Student Edit</a></li>
-                        </ul>
-                     </li>
-
-                     <li class="submenu">
-                        <a href="#"><i class="fas fa-building"></i> <span> Departments</span> <span class="menu-arrow"></span></a>
-                        <ul>
-                           <li><a href="departments.html">Department List</a></li>
-                           <li><a href="add-department.html">Department Add</a></li>
-                           <li><a href="edit-department.html">Department Edit</a></li>
                         </ul>
                      </li>
                      <li class="submenu">
                         <a href="#"><i class="fas fa-book-reader"></i> <span> Course</span> <span class="menu-arrow"></span></a>
                         <ul>
-                           <li><a href="subjects.html">Course List</a></li>
-                           <li><a href="add-subject.html">Course Add</a></li>
-                           <li><a href="edit-subject.html">Course Edit</a></li>
+                           <li><a href="{% url 'list_courses' %}">Course List</a></li>
+                           <li><a href="{% url 'create_course' %}">Course Add</a></li>
                         </ul>
-                     </li>
-                     <li class="menu-title">
-                        <span>Management</span>
                      </li>
                      <li class="submenu">
                         <a href="#"><i class="fas fa-file-invoice-dollar"></i> <span> Attendance</span> <span class="menu-arrow"></span></a>
                         <ul>
-                           <li><a href="fees-collections.html">View attendance</a></li>
+                           <li><a href="{% url 'attendance' %}">View attendance</a></li>
 
-                        </ul>
-                     </li>
-
-                     <li class="menu-title">
-                        <span>Pages</span>
-                     </li>
-                     <li class="submenu">
-                        <a href="#"><i class="fas fa-shield-alt"></i> <span> Authentication </span> <span class="menu-arrow"></span></a>
-                        <ul>
-                           <li><a href="{% url 'login' %}">Login</a></li>
-                           <li><a href="{% url 'signup' %}">Register</a></li>
-                           <li><a href="{% url 'forgot-password' %}">Forgot Password</a></li>
-                           <li><a href="error-404.html">Error Page</a></li>
                         </ul>
                      </li>
 
 
                      <li class="submenu">
-                        <a href="javascript:void(0);"><i class="fas fa-code"></i> <span>Multi Level</span> <span class="menu-arrow"></span></a>
-                        <ul>
-                           <li class="submenu">
-                              <a href="javascript:void(0);"> <span>Level 1</span> <span class="menu-arrow"></span></a>
-                              <ul>
-                                 <li><a href="javascript:void(0);"><span>Level 2</span></a></li>
-                                 <li class="submenu">
-                                    <a href="javascript:void(0);"> <span> Level 2</span> <span class="menu-arrow"></span></a>
-                                    <ul>
-                                       <li><a href="javascript:void(0);">Level 3</a></li>
-                                       <li><a href="javascript:void(0);">Level 3</a></li>
-                                    </ul>
-                                 </li>
-                                 <li><a href="javascript:void(0);"> <span>Level 2</span></a></li>
-                              </ul>
-                           </li>
-                           <li>
-                              <a href="javascript:void(0);"> <span>Level 1</span></a>
-                           </li>
-                        </ul>
+                          <a href="#"><i class="fas fa-building"></i> <span> Areas</span> <span class="menu-arrow"></span></a>
+                          <ul>
+                             <li><a href="{% url 'add_area' %}"><span>Add Area</span></a></li>
+                             <li><a href="{% url 'list_areas' %}"> <span>Area List</span></a></li>
+                             <li><a href="{% url 'map_area' %}"> <span>Map Student-Area</span></a></li>
+                             <li><a href="{% url 'student_areas' %}"> <span>Students-Areas</span></a></li>
+                          </ul>
                      </li>
+                      {%  endif %}
                   </ul>
                </div>
             </div>

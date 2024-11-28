@@ -1,0 +1,74 @@
+{% extends 'Home/base.html' %}
+{% load static %}
+{% block body %}
+   
+         <div class="page-wrapper">
+            <div class="content container-fluid">
+               <div class="page-header">
+                  <div class="row align-items-center">
+                     <div class="col">
+                        <h3 class="page-title">Edit Course</h3>
+                        <ul class="breadcrumb">
+                           <li class="breadcrumb-item"><a href="{% url 'list_courses' %}">Courses</a></li>
+                           <li class="breadcrumb-item active">Edit Course</li>
+                        </ul>
+                     </div>
+                  </div>
+               </div>
+               <div class="row">
+                  <div class="col-sm-12">
+                     <div class="card">
+                        <div class="card-body">
+                           <form method="POST">
+                              {% csrf_token %}
+                              <div class="row">
+                                 <div class="col-12">
+                                    <h5 class="form-title"><span>Course Information</span></h5>
+                                 </div>
+
+                                 <div class="col-12 col-sm-6">
+                                    <div class="form-group">
+                                       <label>Course</label>
+                                       <input type="text" class="form-control" name="course_name" required value="{{ course.course_name }}">
+                                    </div>
+                                 </div>
+                                  <div class="col-12 col-sm-6">
+                                    <div class="form-group">
+                                       <label>Short Code</label>
+                                       <input type="text" class="form-control" name="short_code" required value="{{ course.short_code }}">
+                                    </div>
+                                 </div>
+
+                                <div class="col-12">
+                                     <div class="btn-group">
+                                        <button type="submit" class="btn btn-primary">Update</button>
+                                        <a href="{% url 'list_courses' %}" class="btn btn-outline-danger">Cancel</a>
+                                     </div>
+                                </div>
+                                  <div class="mt-5">
+                                      {% if messages %}
+                                        <ul class="messages">
+                                            {% for message in messages %}
+                                            <li {% if message.tags %} class="{{ message.tags }}"{% endif %} >{{ message }}</li>
+                                            {% endfor %}
+                                        </ul>
+                                        {% endif %}
+                                  </div>
+                              </div>
+                           </form>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <script src="{%static 'assets/js/jquery-3.6.0.min.js' %}"></script>
+      <script src="{%static 'assets/js/popper.min.js' %}"></script>
+      <script src="{%static 'assets/plugins/bootstrap/js/bootstrap.min.js' %}"></script>
+      <script src="{%static 'assets/plugins/slimscroll/jquery.slimscroll.min.js' %}"></script>
+      <script src="{%static 'assets/js/script.js' %}"></script>
+   </body>
+   <!-- Mirrored from preschool.dreamguystech.com/html-template/add-student.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 28 Oct 2021 11:11:50 GMT -->
+</html>
+{% endblock %}

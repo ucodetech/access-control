@@ -7,10 +7,10 @@
         <div class="page-header">
             <div class="row">
                 <div class="col-sm-12">
-                    <h3 class="page-title">{student.first_name} Details</h3>
+                    <h3 class="page-title">{{ student.first_name }} Details</h3>
                     <ul class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="/student">Student</a></li>
-                        <li class="breadcrumb-item active">{student.first_name} Details</li>
+                        <li class="breadcrumb-item"><a href="{% url 'student_list' %}">Student</a></li>
+                        <li class="breadcrumb-item active">{{ student.first_name }} Details</li>
                     </ul>
                 </div>
             </div>
@@ -24,7 +24,7 @@
                         <div class="about-info">
                             <h4>About Me</h4>
                             <div class="media mt-3">
-                                <img src="{{ student.student_image.url }}" class="mr-3" alt="Student Image">
+                                <img src="{{ student.image.url }}" class="mr-3" alt="Student Image">
                                 <div class="media-body">
                                     <ul>
                                         <li>
@@ -32,8 +32,12 @@
                                             <span class="info-span">{{ student.first_name }} {{ student.last_name }}</span>
                                         </li>
                                         <li>
-                                            <span class="title-span">Department: </span>
-                                            <span class="info-span">{{ student.department }}</span>
+                                            <span class="title-span">Course: </span>
+                                            <span class="info-span">{{ student.course }}</span>
+                                        </li>
+                                        <li>
+                                            <span class="title-span">Level: </span>
+                                            <span class="info-span">{{ student.level }}</span>
                                         </li>
                                         <li>
                                             <span class="title-span">Mobile: </span>
@@ -42,8 +46,8 @@
                                         <li>
                                             <span class="title-span">Email: </span>
                                             <span class="info-span">
-                                                <a href="{{ student.email }}" class="__cf_email__">
-                                                    [email&#160;protected]
+                                                <a href="mailto::{{ student.email }}" class="__cf_email__">
+                                                    {{ student.email}}
                                                 </a>
                                             </span>
                                         </li>
@@ -66,24 +70,22 @@
                             </div>
 
                             <div class="row follow-sec">
-                                <div class="col-md-4 mb-3">
-                                    <div class="blue-box">
-                                        <h3>2850</h3>
-                                        <p>Followers</p>
+                                <div class="col-md-6 mb-3">
+                                    <div class="blue-box bg-dark">
+                                        <h3>Access Code:</h3>
+                                        <h2 class="font-weight-bold text-warning">{{ student.access_control.unique_id }}</h2>
                                     </div>
                                 </div>
-                                <div class="col-md-4 mb-3">
+                                <div class="col-md-6 mb-3">
                                     <div class="blue-box">
-                                        <h3>2050</h3>
-                                        <p>Following</p>
+                                        <h3>QR Code:</h3>
+                                        <img src="{{ student.access_control.qr_code.url }}" alt="qr code">
+                                        <p>
+                                            <a href="{% url 'download_card' student.id %}" class="btn btn-sm btn-warning mt-5 btn-rounded">Download Card</a>
+                                        </p>
                                     </div>
                                 </div>
-                                <div class="col-md-4 mb-3">
-                                    <div class="blue-box">
-                                        <h3>2950</h3>
-                                        <p>Friends</p>
-                                    </div>
-                                </div>
+
                             </div>
 
                             <div class="row mt-2">

@@ -31,7 +31,9 @@ INSTALLED_APPS = [
     'school',
     'student',
     'home_auth',
-    'superuser'
+    'superuser',
+    'course',
+    'Attendance'
 
 ]
 
@@ -132,7 +134,14 @@ AUTHENTICATION_BACKENDS = (
 
 
 # Use console email backend for local development
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+# Looking to send emails in production? Check out our Email API/SMTP product!
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'sandbox.smtp.mailtrap.io'
+EMAIL_HOST_USER = 'd626549cd5b3bb'
+EMAIL_HOST_PASSWORD = '25740707199590'
+EMAIL_PORT = '2525'
 
 # settings.py
 

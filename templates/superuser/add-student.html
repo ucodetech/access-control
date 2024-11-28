@@ -70,23 +70,33 @@
                                  <div class="col-12 col-sm-6">
                                     <div class="form-group">
                                        <label>Course</label>
-                                       <input type="text" class="form-control" name="course" required>
+                                        <select id="course" name="course" class="form-control" required>
+                                          <option value="">-- Select a Course --</option>
+                                          {% for course in courses %}
+                                              <option value="{{ course.course_name }}">{{ course.course_name }}</option>
+                                          {% endfor %}
+                                      </select>
                                     </div>
                                  </div>
                                  <div class="col-12 col-sm-6">
                                     <div class="form-group">
                                        <label>Level</label>
-                                       <input type="text" class="form-control" name="level" required>
+                                         <select id="level" name="level" class="form-control" required>
+                                          <option value="">-- Select a level --</option>
+                                          {% for level in levels %}
+                                              <option value="{{ level }}">{{ level }}</option>
+                                          {% endfor %}
+                                      </select>
                                     </div>
                                  </div>
-                                 <div class="col-12 col-sm-6">
-                                    <div class="form-group">
-                                       <label>Department</label>
-                                       <div>
-                                          <input type="text" class="form-control" name="department" required>
-                                       </div>
-                                    </div>
-                                 </div>
+<!--                                 <div class="col-12 col-sm-6">-->
+<!--                                    <div class="form-group">-->
+<!--                                       <label>Department</label>-->
+<!--                                       <div>-->
+<!--                                          <input type="text" class="form-control" name="department" required>-->
+<!--                                       </div>-->
+<!--                                    </div>-->
+<!--                                 </div>-->
 
                                  <div class="col-12 col-sm-6">
                                     <div class="form-group">
@@ -98,6 +108,15 @@
                                  <div class="col-12">
                                     <button type="submit" class="btn btn-primary">Submit</button>
                                  </div>
+                                 <div class="mt-5">
+                                       {% if messages %}
+                                            <ul class="messages">
+                                                {% for message in messages %}
+                                                <li {% if message.tags %} class="{{ message.tags }}"{% endif %} >{{ message }}</li>
+                                                {% endfor %}
+                                            </ul>
+                                        {% endif %}
+                                  </div>
                               </div>
                            </form>
                         </div>
